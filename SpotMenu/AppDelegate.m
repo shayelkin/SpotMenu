@@ -55,7 +55,7 @@
 {
     NSString* trackName = [self getCurrentPlayingTrack];
     NSLog(@"trackName == %@", trackName);
-    [_statusItem setTitle: trackName ? trackName : @"♫"];
+    [_statusItem setTitle: (trackName != NULL) ? trackName : @"♫"];
 }
 
 - (void)statusItemClicked:(id)sender
@@ -90,8 +90,8 @@
     if (returnDescriptor != NULL) {
         // successful execution
         if (kAENullEvent != [returnDescriptor descriptorType]) {
-            // assume AppleScript result is UTF-8
-            trackName = [[NSString alloc] initWithData:[returnDescriptor data] encoding:NSUTF8StringEncoding];
+            // AppleScript result is utxt, which is NSUTF16BigEndianStringEncoding encoded
+            trackName = [[NSString alloc] initWithData:[returnDescriptor data] encoding:NSUTF16BigEndianStringEncoding];
         }
     }
     
