@@ -90,8 +90,7 @@
     if (returnDescriptor != NULL) {
         // successful execution
         if (kAENullEvent != [returnDescriptor descriptorType]) {
-            // AppleScript result is utxt, which is NSUTF16BigEndianStringEncoding encoded
-            trackName = [[NSString alloc] initWithData:[returnDescriptor data] encoding:NSUTF16BigEndianStringEncoding];
+            trackName = [returnDescriptor stringValue];
         }
     }
     
