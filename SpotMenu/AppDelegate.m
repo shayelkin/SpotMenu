@@ -48,7 +48,8 @@
     [_statusItem setTitle:@"♫"];
     [_statusItem setEnabled:YES];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateStatusItemTitle:) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(updateStatusItemTitle:) userInfo:nil repeats:YES];
+    timer.tolerance = 0.2f;
     [self updateStatusItemTitle:nil];
 }
 
