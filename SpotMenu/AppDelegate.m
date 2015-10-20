@@ -30,6 +30,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "AppDelegate.h"
+#import "Spotify.h"
 
 @interface AppDelegate ()
 
@@ -66,6 +67,17 @@
     }
 }
 
+#ifdef TRUE
+- (NSString*)getCurrentPlayingTrack
+{
+    SpotifyApplication *spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
+    if (([spotify isRunning]) && ([spotify playerState] == SpotifyEPlSPlaying)) {
+        SpotifyTrack *currentTrack = [spotify currentTrack];
+        return [NSString stringWithFormat:@"%@ - %@", [currentTrack name], [currentTrack artist]];
+    }
+    return NULL;
+}
+#else
 - (NSString*)getCurrentPlayingTrack
 {
     NSString *trackName = NULL;
@@ -96,5 +108,6 @@
     
     return trackName;
 }
+#endif
 
 @end
